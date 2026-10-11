@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CircleLink | Friend Network</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-row">
+          <div class="brand-mark">C</div>
+          <div>
+            <div class="brand-name">CircleLink</div>
+            <div class="brand-sub">Network Hub</div>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <div class="nav-heading">Workspace</div>
+          <button class="nav-item active"><span>Overview</span><span class="count">24</span></button>
+          <button class="nav-item"><span>Friends</span><span class="count">87</span></button>
+          <button class="nav-item"><span>Requests</span><span class="count" id="navRequestCount">9</span></button>
+          <button class="nav-item"><span>Groups</span><span class="count">12</span></button>
+          <button class="nav-item"><span>Events</span><span class="count">7</span></button>
+          <button class="nav-item"><span>Messages</span><span class="count">18</span></button>
+        </nav>
+
+        <div class="profile-card">
+          <div class="profile-top">
+            <div class="avatar large avatar-gradient">AS</div>
+            <div>
+              <h3>Alicia Stone</h3>
+              <p>Product Designer</p>
+            </div>
+          </div>
+
+          <div class="mini-stats">
+            <div>
+              <strong id="miniFriends">0</strong>
+              <span>Friends</span>
+            </div>
+            <div>
+              <strong>12</strong>
+              <span>Groups</span>
+            </div>
+            <div>
+              <strong>5</strong>
+              <span>Invites</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div>
+            <div class="eyebrow">Social network</div>
+            <h1>Friend Network Center</h1>
+          </div>
+
+          <div class="toolbar">
+            <label class="search-box" aria-label="Search people">
+              <span>⌕</span>
+              <input id="searchInput" type="text" placeholder="Search friends or contacts" />
+            </label>
+            <button class="btn primary" id="createGroupBtn">New Group</button>
+            <button class="btn secondary" id="createEventBtn">Create Event</button>
+          </div>
+        </header>
+
+        <section class="hero-banner">
+          <div>
+            <div class="pill-tag">Friends & communities</div>
+            <h2>Build a stronger, more connected circle.</h2>
+            <p>Manage requests, organize community events, and share your network profile securely.</p>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn primary" id="quickAddBtn">Add Friend</button>
+            <button class="btn ghost" id="qrToggleBtn">Share QR</button>
+          </div>
+        </section>
+
+        <section class="stats-grid">
+          <article class="stat-box">
+            <div class="stat-value" id="totalFriendsStat">0</div>
+            <div class="stat-label">Friends</div>
+          </article>
+          <article class="stat-box">
+            <div class="stat-value" id="pendingRequestsStat">0</div>
+            <div class="stat-label">Pending Requests</div>
+          </article>
+          <article class="stat-box">
+            <div class="stat-value" id="mutualConnectionsStat">0</div>
+            <div class="stat-label">Mutual Connections</div>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <div class="panel panel-large">
+            <div class="panel-header">
+              <h3>Your friends</h3>
+              <span class="status-chip">Updated today</span>
+            </div>
+            <div id="friendList" class="list-stack"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Friend requests</h3>
+              <span class="status-chip warning">Needs action</span>
+            </div>
+            <div id="requestList" class="list-stack compact"></div>
+          </div>
+        </section>
+
+        <section class="content-grid bottom-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Suggested connections</h3>
+              <span class="status-chip info">Recommended</span>
+            </div>
+            <div id="suggestionList" class="list-stack compact"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Network summary</h3>
+              <span class="status-chip success">Healthy</span>
+            </div>
+
+            <div class="summary-box">
+              <div class="summary-row">
+                <span>New this week</span>
+                <strong>14</strong>
+              </div>
+              <div class="summary-row">
+                <span>Community meetups</span>
+                <strong>07</strong>
+              </div>
+              <div class="summary-row">
+                <span>Shared circles</span>
+                <strong>16</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <aside class="rightbar">
+        <div class="panel qr-panel">
+          <div class="panel-header center">
+            <h3>Share profile</h3>
+          </div>
+
+          <div class="qr-wrap">
+            <canvas id="qrCanvas" width="180" height="180"></canvas>
+          </div>
+
+          <div class="profile-link" id="profileLinkText">circlelink://profile/alicia-stone</div>
+
+          <p class="qr-copy">
+            Use this QR code to share your professional profile and connect with trusted contacts.
+          </p>
+        </div>
+
+        <div class="panel notes-panel">
+          <div class="panel-header">
+            <h3>Circle notes</h3>
+          </div>
+
+          <div class="note-list">
+            <div class="note-item">
+              <div class="avatar avatar-gradient small dark">RN</div>
+              <div>
+                <strong>Rina Nouri</strong>
+                <span>Design review on Friday</span>
+              </div>
+            </div>
+            <div class="note-item">
+              <div class="avatar avatar-gradient small purple">TM</div>
+              <div>
+                <strong>Tariq Mendez</strong>
+                <span>Event planning in progress</span>
+              </div>
+            </div>
+            <div class="note-item">
+              <div class="avatar avatar-gradient small green">LP</div>
+              <div>
+                <strong>Lina Park</strong>
+                <span>Community update sent</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="modal hidden" id="modalWindow">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="modalTitle">Create New Group</h3>
+          <button class="close-btn" id="closeModalBtn" aria-label="Close">✕</button>
+        </div>
+
+        <form id="modalForm">
+          <label>
+            Name
+            <input id="formName" type="text" placeholder="Example: Product Circle" required />
+          </label>
+          <label>
+            Category
+            <input id="formCategory" type="text" placeholder="Example: Design / Business / Community" required />
+          </label>
+          <label>
+            Description
+            <textarea id="formDescription" rows="3" placeholder="Add a short description..." required></textarea>
+          </label>
+
+          <div class="modal-actions">
+            <button type="button" class="btn secondary" id="cancelModalBtn">Cancel</button>
+            <button type="submit" class="btn primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.0.0/build/qrcode.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
